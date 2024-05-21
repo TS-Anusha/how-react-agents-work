@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-from tools.system_time_tool import check_system_time
+from tools.system_time_tool import *
 from react_template import get_react_prompt_template
 from langchain_core.output_parsers import StrOutputParser
 from langchain.tools.render import render_text_description
@@ -12,10 +12,10 @@ load_dotenv()
 llm = ChatOpenAI(model="gpt-4", model_kwargs={"stop":"\nObservation"})
 
 # set my message
-query = "What's the current time in New York (you are in London) just show the time in New York and not the date?"
+query = "What's the current time in New York?"
 
 # set the tools
-tools = [check_system_time]
+tools = [check_system_time, convert_time_zone]
 
 # Get the react prompt template
 prompt_template = get_react_prompt_template()
